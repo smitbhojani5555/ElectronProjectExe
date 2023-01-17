@@ -1,0 +1,6 @@
+1. unzip the folder and go into that folder 
+2. open folder in cmd
+3. run command npm i 
+4. run command "npm run serve"
+4. after successful above command open another cmd and run the command "npm run electron"
+

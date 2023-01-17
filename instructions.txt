@@ -1,0 +1,37 @@
+/*
+*
+* English
+*
+*/
+
+Instructions:
+
+1-) copy the contents of the package-dev.json file into the package.json file
+
+2-) execute the command "npm install"
+
+3-) after the dependencies are installed, delete the contents of the package.json file and paste the contents of the package-pro.json
+
+4-) execute the command "npm run dist"
+
+Note: The application is already pointing to an api created and mounted on my hosting.
+The path of the api is: http://timetracker.vnddev.com/api/desktop/
+
+/*
+*
+* Español
+*
+*/
+
+Instrucciones:
+
+1-) copiar el contenido del archivo package-dev.json en el archivo package.json
+
+2-) ejecutar el comando "npm install"
+
+3-) despues de que se instalen las dependencias, borrar el contenido del archivo package.json y pegarle el contenido del package-pro.json
+
+4-) ejecutar el comando "npm run dist"
+
+Nota: Ya la aplicacion esta apuntando a una api creada y montada en mi hosting.
+La ruta de la api es : http://timetracker.vnddev.com/api/desktop/
