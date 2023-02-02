@@ -7,10 +7,7 @@ import OfflineHandler from "../handlers/OfflineHandler";
 
 // temp folder path
 const tmpDir = path.join(app.getPath("temp"), "./neoStaff_tmp");
-const tmpDirScreenshots = path.join(
-  tmpDir,
-  "./ScreenShots"
-);
+const tmpDirScreenshots = path.join(tmpDir, "./ScreenShots");
 
 var state;
 var idle;
@@ -123,6 +120,41 @@ ipcRenderer.on(
         });
       });
     }
+  }.bind(this)
+);
+
+ipcRenderer.on(
+  "check-update",
+  function(event, version) {
+    logger.debug("checking updated version");
+    console.log("checking updated version");
+    var appLatestVersion;
+    axios
+      .get("neo_settings")
+      .then(async (r) => {
+        let neoSettingData = r.data.data;
+        let neoSettingJson = JSON.parse(neoSettingData);
+        console.log(neoSettingJson);
+        appLatestVersion = neoSettingJson.find((x) => x.ID == 1)[
+          "settings_value"
+        ];
+        if (version === appLatestVersion) {
+          console.log("Same version");
+        } else {
+          let msj = "Please Update App Version !";
+          let d = await NotificationHandler.updatePopup(msj);
+          if (d) {
+            var updateUrl =
+              navigator.appVersion.indexOf("Mac") != -1
+                ? neoSettingJson.find((x) => x.ID == 3)["settings_value"]
+                : neoSettingJson.find((x) => x.ID == 2)["settings_value"];
+            window.open(updateUrl, "_blank");
+          }
+        }
+      })
+      .catch((e) => {
+        ErrorHandler.render(e);
+      });
   }.bind(this)
 );
 
@@ -319,7 +351,7 @@ class CaptureHandler {
 
         let fromTime = this.fromTime(this.from);
         let toTime = this.toTime(this.to);
-        
+
         let screenShotFileName = "" + fromTime + "_" + toTime;
         logger.debug(
           "Activities APIs calling, get screenshot file from temp :" +
@@ -350,7 +382,7 @@ class CaptureHandler {
             let data = {
               from: fromTime,
               to: toTime,
-              seconds: 0,
+              second: 0,
               date: self.date,
               keyboard_count: self.total_key_event,
               mouse_count: self.total_mouse_event,
@@ -366,7 +398,6 @@ class CaptureHandler {
              * saved offline data
              */
             let fileName = "./idleData_" + Date.now();
-            
 
             OfflineHandler.CheckNetworkStatus().then(
               (success) => {

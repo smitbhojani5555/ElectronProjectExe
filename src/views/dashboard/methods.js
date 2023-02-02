@@ -19,6 +19,7 @@ export default {
     this.user = data.user;
     //this.company = data.company;
     this.selectedAccount = data.selectedAccount;
+    CommonRequest.getUserConfig();
   },
   getProjects() {
     this.busyProject = true;
@@ -275,7 +276,9 @@ export default {
     let _r = 0;
 
     if (_m) {
-      return 600;
+      var neoConfigData = JSON.parse(localStorage.getItem("neo_settings"));
+      var ScreenshotTime = (neoConfigData.find(x => x.ID == 6)["settings_value"] * 60);
+      return ScreenshotTime;
     } else {
       while (!Number.isInteger(m / 10)) {
         m++;
@@ -441,7 +444,9 @@ export default {
   },
   resetTimer() {
     timerStartedDate = new Date();
-    this.total_active_time = 600;
+    var neoConfigData = JSON.parse(localStorage.getItem("neo_settings"));
+    var ScreenshotTime = (neoConfigData.find(x => x.ID == 6)["settings_value"] * 60);
+    this.total_active_time = ScreenshotTime;
     this.mouse_event = 0;
     this.key_event = 0;
 
@@ -635,8 +640,25 @@ export default {
   },
 
   sendReportAnError(data) {
-    console.log(data);
-    CommonRequest.reportAnError(this, data);
+    let userId = localStorage.getItem("userID");
+    var self = this;
+    $.getJSON('http://www.geoplugin.net/json.gp', function(res) {
+      let returndata = {
+        UserID: !!userId ? userId : 0,
+        Description: data["error"],
+        Ip: res.geoplugin_request,
+        Datetime: new Date().getTime(),
+      };
+      CommonRequest.reportAnError(self, returndata);  
+  }).catch((e) => {
+    let record = {
+      UserID: 1,
+      Description: data["error"],
+      Ip: "127.0.0.1",
+      Datetime: new Date().getTime(),
+    };
+    CommonRequest.reportAnError(self, record);  
+  })
   },
 
   applyPreference(data) {

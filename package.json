@@ -1,6 +1,6 @@
 {
   "name": "neostaff",
-  "version": "1.2.0",
+  "version": "1.2.4",
   "description": "Application for screenshot timer",
   "main": "app.js",
   "private": true,
@@ -9,7 +9,12 @@
     "build": "vue-cli-service build",
     "electron": "electron .",
     "pack": "electron-builder build --dir",
-    "dist": "electron-builder build"
+    "dist": "electron-builder build",
+    "dist:w": "electron-builder -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smitbhojani5555/ElectronProjectExe.git"
   },
   "author": "VND",
   "license": "MIT",
@@ -36,7 +41,10 @@
         "nsis",
         "msi"
       ],
-      "icon": "./build/favicon.ico"
+      "icon": "./build/favicon.ico",
+      "signAndEditExecutable": true,
+      "certificateFile": "./VND Code Signing Certificate.pfx",
+      "certificatePassword":"1234"
     }
   },
   "devDependencies": {
@@ -55,6 +63,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "dotenv": "^16.0.3",
     "electron-custom-dialog": "^1.0.0",
     "electron-modal": "^1.0.0",
     "electron-updater": "^5.3.0",

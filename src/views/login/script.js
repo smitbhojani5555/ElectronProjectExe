@@ -1,6 +1,7 @@
 import LoginRequest from "../../requests/LoginRequest";
 import OfflineHandler from "../../handlers/OfflineHandler";
 import ErrorHandler from "../../handlers/ErrorHandler";
+import CommonRequest from "../../requests/CommonRequest";
 const log4js = window.require("log4js");
 const logger = log4js.getLogger("neostaff");
 
@@ -36,6 +37,7 @@ export default {
       };
       OfflineHandler.CheckNetworkStatus().then((success)=>{
         LoginRequest.login(this, data);
+        CommonRequest.getUserConfig();
         logger.info("Login successfully...");
       },(error)=>{
         logger.error("You have no active internet connection!");

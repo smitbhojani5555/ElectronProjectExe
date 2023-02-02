@@ -44,7 +44,7 @@
                             <v-list-item-title style="font-size:13px;">Stop working</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item link @click="openLinkInBrowser('https://media.neostaff.app/dashboard')">
+                    <v-list-item link @click="openLinkInBrowser(neoStaffAbout.dashboardURL)">
                         <v-list-item-icon>
                             <v-icon>fas fa-tachometer-alt</v-icon>
                         </v-list-item-icon>
@@ -52,7 +52,7 @@
                             <v-list-item-title style="font-size:13px;">Open Dashboard</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item link @click="openLinkInBrowser('https://media.neostaff.app/activities')">
+                    <v-list-item link @click="openLinkInBrowser(neoStaffAbout.addEditURL)">
                         <v-list-item-icon>
                             <v-icon>far fa-clock</v-icon>
                         </v-list-item-icon>
@@ -124,7 +124,7 @@
                             </v-dialog>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item link @click="openLinkInBrowser('https://support.neostaff.app')">
+                    <v-list-item link @click="openLinkInBrowser(neoStaffAbout.supportURL)">
                         <v-list-item-icon>
                             <v-icon>far fa-question-circle</v-icon>
                         </v-list-item-icon>
@@ -545,7 +545,7 @@
         </v-content>
         <v-footer app>
             <v-spacer></v-spacer>
-            <v-subheader>NeoStaff &copy; Copyright 2021</v-subheader>
+            <v-subheader>{{neoStaffAbout.copyrights}}</v-subheader>
             <v-spacer></v-spacer>
         </v-footer>
     </div>

@@ -65,6 +65,21 @@ const NotificationHandler = {
         return true
 
       return false
+    },
+
+    async updatePopup(msj) {
+      let r = await Swal.fire({
+        title: msj,
+        icon: 'warning',
+        showCancelButton: false,
+        allowOutsideClick:false,
+        confirmButtonText: 'Download'
+      })
+
+      if(r.value)
+        return true
+
+      return false
     }
  }
 

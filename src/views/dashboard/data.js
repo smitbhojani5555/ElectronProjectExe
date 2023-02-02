@@ -111,7 +111,7 @@ export default function() {
       appName:"",
       dialog:false,
       termAndCondition:"Term and condition of neoStaff",
-      copyrights:"Copyright © 2021-2022 Neostaff, LLC. All rights reserved."
+      copyrights:"Neostaff © Copyright 2023."
     },
     reportAnError:{
       userId:0,

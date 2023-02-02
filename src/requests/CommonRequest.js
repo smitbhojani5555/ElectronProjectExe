@@ -2,13 +2,26 @@
 class CommonRequest
 {
 	reportAnError(vm, data) {
-		axios.post('report-error', data).then(r => {
+		axios.post('report_an_error', data).then(r => {
 		}).catch(e => {
 			vm.reportAnError_Desc = "";
 			ErrorHandler.render(e);
 		});
 		NotificationHandler.simpleSuccess("Error report sent. Thanks!")
 	}
+
+	reportAnError(vm, data) {
+		axios
+		  .post("report_an_error", data)
+		  .then((r) => {
+			vm.reportAnError.error = "";
+			NotificationHandler.simpleSuccess("Error report sent. Thanks!");
+		  })
+		  .catch((e) => {
+			vm.reportAnError.error = "";
+			ErrorHandler.render(e);
+		  });
+		}
 
 	getUserConfig() {
 		axios
